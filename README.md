@@ -53,6 +53,40 @@ The list of the supported drivers could be found [here](http://docs.doctrine-pro
 
 The `--force` option will not ask you confirmation to overwrite existing files.
 
+## Include generated files
+
+You have two chances:
+* psr-4 autoload;
+* classmap autoload.
+
+### PSR-4 autoload
+
+If your namespace property is set you can use `psr-4` composer autoload:
+```json
+"autoload" : {
+  "psr-4" : {
+    "" : "your-destination-folder/"
+  }
+}
+```
+
+Don't forget to set `Model::$auto_prefix_models` to be sure that your model is recognized properly when you use 
+`Model::factory` method:
+```php
+Model::$auto_prefix_models = 'YourAmazing\\Namespace\\';
+```
+
+### Classmap autoload
+
+If your namespace property is empty or not set, you have to autoload using:
+```json
+"autoload": {
+  "classmap" : [
+    "your-destination-folder/"
+  ]
+}
+```
+
 ## Issues
 
 If you have issues, just open one [here](https://github.com/DavidePastore/paris-model-generator/issues).
