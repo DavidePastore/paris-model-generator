@@ -222,16 +222,30 @@ class ParisGeneratorCommand extends Command
 		$table
 			->setStatic(true)
 			->setDefaultValue($className);
+			
+		$tableUseShortName = new PropertyGenerator('_table_use_short_name');
+		
+		$tableUseShortName
+			->setStatic(true)
+			->setDefaultValue(true);
+		
+		$namespace = $this->config->getNamespace();
+		$extendedClass = '\Model';
+		if(isset($namespace) && !empty($namespace)){
+			$class->setNamespaceName($this->config->getNamespace());
+		}
 		
 		$class
 			->setName(ucfirst($className))
-			->setNamespaceName($this->config->getNamespace())
 			->setDocblock($docblock)
-			->setExtendedClass('Model')
+			->setExtendedClass($extendedClass)
 			->addProperties(array(
 				$idColumn,
-				$table
+				$table,
+				$tableUseShortName
 			));
+		
+		
 			
 		$file = FileGenerator::fromArray(array(
 			'classes'  => array($class),
@@ -244,7 +258,7 @@ class ParisGeneratorCommand extends Command
 		
 		$generatedCode = $file->generate();
 		
-		$directory = $this->config->getDestinationFolder() . $this->config->getNamespace();
+		$directory = $this->config->getDestinationFolder() . $namespace;
 		
 		if(!file_exists($directory)){
 			mkdir($directory, 0777, true);

@@ -99,7 +99,8 @@ class Config {
 	public function createFromComposer($file = 'composer.json'){
 		$composer = $this->readComposerDotJson($file);
 		
-		$this->setNamespace('\\Paris\\Model\\Generator');
+		//Default values
+		$this->setNamespace('');
 		$this->setDestinationFolder('generated\\');
 		
 		if(isset($composer['extra']) && isset($composer['extra']['paris-model-generator'])){
