@@ -1,0 +1,28 @@
+{
+	"name": "davidepastore/paris-model-generator",
+	"description": "Paris model generator from database",
+	"type": "library",
+	"keywords": [
+        "generator",
+        "model",
+        "paris"
+    ],
+	"license" : "MIT",
+	"authors" : [
+		{
+			"name" : "Davide Pastore",
+			"email" : "pasdavide@gmail.com"
+		}
+	],
+	"autoload" : {
+		"psr-4" : {
+			"" : "src/"
+		}
+	},
+    "require": {
+		"doctrine/dbal" : "2.4",
+        "symfony/console": "~2.6",
+		"zendframework/zend-code" : "~2.3"
+    },
+	"bin": ["paris-generator"]
+}
